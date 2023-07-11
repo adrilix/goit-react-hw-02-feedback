@@ -1,41 +1,60 @@
 import React from 'react';
-// import user from "../../data//user.json"
-// import data from "../../data/data.json"
-// import friends from "../../data/friends.json"
-// import transactions from "../../data/transactions.json"
-// import Profile from "../profile/profile"
-// import Statistics from '../Statistics/Statistics';
+
 import Section from '../Section/Section';
 import FeedbackOptions from 'components/FeedbackOptions/FeedbackOption';
-// import FriendsList from "../FriendsList/FriendsList"
-// import History from "components/transactions/transactions"
+import Statistics from 'components/Statistics/Statistics';
+import Notification from '../Notification/Notification';
 
 export class App extends React.Component {
+  // static defaultProps ={
+  //       good: 0,
+  //       neutral: 0,
+  //       bad: 0,
+  // // };
+
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
   };
 
-  countFeedback = newState => {
-    this.setState(prevState => {
-      return{
-        ...prevState,
-        [newState]: prevState[newState] + 1 ,
-      }
-    })
-  }
+  leaveFeedback = feedbackName => {
+    this.setState(prevState => ({
+      [feedbackName]: prevState[feedbackName] + 1,
+    }));
+  };
 
-  // handleIncrement=()=>{
-  //   console.log('+1');
-  // }
+  total = () => {
+    return this.state.good + this.state.neutral + this.state.bad;
+  };
+
+  positivePercentage = () =>
+    this.state.good === 0
+      ? 0
+      : Math.ceil((this.state.good / this.total()) * 100);
 
   render() {
-    // const { good, neutral, bad } = this.state;
     return (
-      <Section title = 'Please leave feedback'>
-          <FeedbackOptions countFeedback={this.countFeedback} />
-      </Section>
+      <>
+        <Section title="Please leave feedback">
+          <FeedbackOptions leaveFeedback={this.leaveFeedback} />
+        </Section>
+
+        {(this.total() === 0) 
+        ? (<Section>
+            <Notification message="There is no feedback"></Notification>{' '}
+          </Section>)
+        : ( <Section title="Statistics">
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={this.total()}
+              positivePercentage={this.positivePercentage()}
+            ></Statistics>
+          </Section>
+        )}
+      </>
     );
   }
 }

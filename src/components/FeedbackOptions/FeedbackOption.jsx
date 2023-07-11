@@ -1,19 +1,24 @@
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 
-
-const FeedbackOptions = ({counterFeedback}) =>{
+const FeedbackOptions = ({ leaveFeedback }) => {
     return (
-        <div>
-            <Button onClick={()=>counterFeedback('neutral')}>neutral</Button>
-            <Button onClick={()=>counterFeedback('good')}>good</Button>
-            <Button onClick={()=>counterFeedback('bad')}>bad</Button>
-        </div>
-    )
-}
+        <>
+            <Button type="button" onClick={() => leaveFeedback('neutral')}>
+                neutral
+            </Button>
+            <Button type="button" onClick={() => leaveFeedback('good')}>
+                good
+            </Button>
+            <Button type="button" onClick={() => leaveFeedback('bad')}>
+                bad
+            </Button>
+        </>
+    );
+};
 
 FeedbackOptions.propTypes = {
-    counterFeedback: PropTypes.func.isRequired,
+    leaveFeedback: PropTypes.func.isRequired,
 };
 
 export default FeedbackOptions;
