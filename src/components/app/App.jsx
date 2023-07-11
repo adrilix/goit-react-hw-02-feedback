@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Section from '../Section/Section';
-import FeedbackOptions from 'components/FeedbackOptions/FeedbackOption';
-import Statistics from 'components/Statistics/Statistics';
-import Notification from '../Notification/Notification';
+import Section from '../Section';
+import FeedbackOptions from 'components/FeedbackOptions';
+import Statistics from 'components/Statistics';
+import Notification from '../Notification';
 
 export class App extends React.Component {
   // static defaultProps ={
