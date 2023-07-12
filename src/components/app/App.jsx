@@ -6,11 +6,6 @@ import Statistics from 'components/Statistics';
 import Notification from '../Notification';
 
 export class App extends React.Component {
-  // static defaultProps ={
-  //       good: 0,
-  //       neutral: 0,
-  //       bad: 0,
-  // // };
 
   state = {
     good: 0,
@@ -34,10 +29,12 @@ export class App extends React.Component {
       : Math.ceil((this.state.good / this.total()) * 100);
 
   render() {
+    const options = Object.keys(this.state);
+    console.log(options);
     return (
       <>
         <Section title="Please leave feedback">
-          <FeedbackOptions leaveFeedback={this.leaveFeedback} />
+          <FeedbackOptions options={options} leaveFeedback={this.leaveFeedback} />
         </Section>
 
         {(this.total() === 0) 
