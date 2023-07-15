@@ -30,7 +30,6 @@ export class App extends React.Component {
 
   render() {
     const options = Object.keys(this.state);
-    console.log(options);
     return (
       <>
         <Section title="Please leave feedback">
